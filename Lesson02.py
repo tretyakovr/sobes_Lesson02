@@ -57,31 +57,31 @@
 # 3. Усовершенствовать родительский класс таким образом, чтобы получить доступ к защищенным
 # переменным. Результат выполнения заданий 1 и 2 должен быть идентичным.
 
-class ItemDiscount:
-    def __init__(self, name, price):
-        self.__name = name
-        self.__price = price
-
-    def get_name(self):
-        return self.__name
-
-    def get_price(self):
-        return self.__price
-
-
-class ItemDiscountReport(ItemDiscount):
-    def __init__(self, name, price):
-        super().__init__(name, price)
-
-    def get_parent_data(self):
-        return self.get_name() + ' ' + str(self.get_price())
-
-
-item1 = ItemDiscountReport('Товар1', 10)
-item2 = ItemDiscountReport('Товар2', 20)
-
-print(item1.get_parent_data())
-print(item2.get_parent_data())
+# class ItemDiscount:
+#     def __init__(self, name, price):
+#         self.__name = name
+#         self.__price = price
+#
+#     def get_name(self):
+#         return self.__name
+#
+#     def get_price(self):
+#         return self.__price
+#
+#
+# class ItemDiscountReport(ItemDiscount):
+#     def __init__(self, name, price):
+#         super().__init__(name, price)
+#
+#     def get_parent_data(self):
+#         return self.get_name() + ' ' + str(self.get_price())
+#
+#
+# item1 = ItemDiscountReport('Товар1', 10)
+# item2 = ItemDiscountReport('Товар2', 20)
+#
+# print(item1.get_parent_data())
+# print(item2.get_parent_data())
 
 
 # 4. Реализовать возможность переустановки значения цены товара. Необходимо, чтобы и
@@ -94,39 +94,34 @@ print(item2.get_parent_data())
 #         self.__name = name
 #         self.__price = price
 #
-#     def set_name(self, name):
-#         self.__name = name
+#     def get_name(self):
+#         return self.__name
+#
+#     def get_price(self):
+#         return self.__price
 #
 #     def set_price(self, price):
 #         self.__price = price
 #
-#     #@property
-#     def get_name(self):
-#         return self.__name
-#
-#     #@property
-#     def get_price(self):
-#         return self.__price
-#
 # class ItemDiscountReport(ItemDiscount):
+#     def __init__(self, name, price):
+#         super().__init__(name, price)
+#
 #     def get_parent_data(self):
 #         return self.get_name() + ' ' + str(self.get_price())
 #
 #
-# item1 = ItemDiscount('Товар1', 10)
-# item2 = ItemDiscount('Товар2', 20)
+# item1 = ItemDiscountReport('Товар1', 10)
+# item2 = ItemDiscountReport('Товар2', 20)
 #
 # item1.set_price(100)
 # item2.set_price(200)
-# print(item1.get_price)
-# print(item2.get_price)
 #
-# print(ItemDiscountReport.get_parent_data(item1))
-# print(ItemDiscountReport.get_parent_data(item2))
+# print(item1.get_price())
+# print(item2.get_price())
 #
-
-
-
+# print(item1.get_parent_data())
+# print(item2.get_parent_data())
 
 
 # 5. Реализовать расчет цены товара со скидкой. Величина скидки должна передаваться в качестве
@@ -136,7 +131,84 @@ print(item2.get_parent_data())
 # Чтобы все работало корректно, не забудьте инициализировать дочерний и родительский классы (вторая
 # и третья строка после объявления дочернего класса).
 
+# class ItemDiscount:
+#     def __init__(self, name, price):
+#         self.__name = name
+#         self.__price = price
+#
+#     def get_name(self):
+#         return self.__name
+#
+#     def get_price(self):
+#         return self.__price
+#
+#     def set_price(self, price):
+#         self.__price = price
+#
+# class ItemDiscountReport(ItemDiscount):
+#     def __init__(self, name, price, discount):
+#         super().__init__(name, price)
+#         self.discount = discount
+#
+#     def __str__(self):
+#         return self.get_name() + '. Цена с учетом скидки: ' + str(self.get_price() - self.get_price() * self.discount / 100)
+#
+#     def get_parent_data(self):
+#         return self.get_name() + ' ' + str(self.get_price())
+#
+#
+# item1 = ItemDiscountReport('Товар1', 10, 10)
+# item2 = ItemDiscountReport('Товар2', 20, 15)
+#
+# item1.set_price(100)
+# item2.set_price(200)
+#
+# print(item1.get_parent_data())
+# print(item2.get_parent_data())
+#
+# print(item1)
+# print(item2)
+
+
 # 6. Проверить на практике возможности полиморфизма. Необходимо разделить дочерний класс ItemDiscountReport
 # на два класса. Инициализировать классы необязательно. Внутри каждого поместить функцию get_info,
 # которая в первом классе будет отвечать за вывод названия товара, а вторая — его цены. Далее реализовать
 # выполнение каждой из функции тремя способами.
+
+class ItemDiscount:
+    def __init__(self, name, price):
+        self.__name = name
+        self.__price = price
+
+    def get_name(self):
+        return self.__name
+
+    def get_price(self):
+        return self.__price
+
+    def set_price(self, price):
+        self.__price = price
+
+class ItemDiscountReport(ItemDiscount):
+    def __init__(self, name, price, discount):
+        super().__init__(name, price)
+        self.discount = discount
+
+    def __str__(self):
+        return self.get_name() + '. Цена с учетом скидки: ' + str(self.get_price() - self.get_price() * self.discount / 100)
+
+    def get_parent_data(self):
+        return self.get_name() + ' ' + str(self.get_price())
+
+
+item1 = ItemDiscountReport('Товар1', 10, 10)
+item2 = ItemDiscountReport('Товар2', 20, 15)
+
+item1.set_price(100)
+item2.set_price(200)
+
+print(item1.get_parent_data())
+print(item2.get_parent_data())
+
+print(item1)
+print(item2)
