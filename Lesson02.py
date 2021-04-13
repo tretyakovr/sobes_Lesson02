@@ -175,6 +175,9 @@
 # которая в первом классе будет отвечать за вывод названия товара, а вторая — его цены. Далее реализовать
 # выполнение каждой из функции тремя способами.
 
+# Это задание вызвало скорее непонимание, чем затруднение.
+# Три способа вызова функции - ?
+
 class ItemDiscount:
     def __init__(self, name, price):
         self.__name = name
@@ -189,26 +192,18 @@ class ItemDiscount:
     def set_price(self, price):
         self.__price = price
 
-class ItemDiscountReport(ItemDiscount):
-    def __init__(self, name, price, discount):
-        super().__init__(name, price)
-        self.discount = discount
-
-    def __str__(self):
-        return self.get_name() + '. Цена с учетом скидки: ' + str(self.get_price() - self.get_price() * self.discount / 100)
-
-    def get_parent_data(self):
-        return self.get_name() + ' ' + str(self.get_price())
+class ItemDiscountReportName(ItemDiscount):
+    def get_info(self):
+        return self.get_name()
 
 
-item1 = ItemDiscountReport('Товар1', 10, 10)
-item2 = ItemDiscountReport('Товар2', 20, 15)
+class ItemDiscountReportPrice(ItemDiscount):
+    def get_info(self):
+        return self.get_price()
 
-item1.set_price(100)
-item2.set_price(200)
 
-print(item1.get_parent_data())
-print(item2.get_parent_data())
+item1 = ItemDiscountReportName('Товар1', 10)
+item2 = ItemDiscountReportPrice('Товар2', 20)
 
-print(item1)
-print(item2)
+print(item1.get_info())
+print(item2.get_info())
